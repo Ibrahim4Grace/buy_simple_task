@@ -40,4 +40,6 @@ loanRoute.delete(
     loanController.deleteLoan,
 );
 
+loanRoute.delete('/logout', authMiddleware(), loanController.logout);
+
 export default loanRoute;

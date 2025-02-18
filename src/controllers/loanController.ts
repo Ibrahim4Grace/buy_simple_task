@@ -6,6 +6,7 @@ import {
     sendJsonResponse,
     ResourceNotFound,
     asyncHandler,
+    BadRequest,
 } from '../middlewares';
 
 const loansData: ILoan[] = [
@@ -269,18 +270,32 @@ export const deleteLoan = asyncHandler(
         const userId = req.currentUser.role;
         const { loanId } = req.params;
 
-        const loan = await Loan.findOne({ id: loanId });
+        const loan = await Loan.findOne({ _id: loanId });
 
         if (!loan) {
             throw new ResourceNotFound(`Loan not found with id ${loanId}`);
         }
 
-        await Loan.deleteOne({ id: loanId });
+        await Loan.deleteOne({ _id: loanId });
 
         sendJsonResponse(
             res,
             200,
             `Loan with id ${loanId} deleted successfully`,
         );
+    },
+);
+
+export const logout = asyncHandler(
+    async (req: Request, res: Response): Promise<void> => {
+        const token = req.headers.authorization?.split(' ')[1];
+
+        if (!token) {
+            throw new BadRequest('No token provided');
+        }
+
+        res.clearCookie('access_token');
+
+        sendJsonResponse(res, 200, 'Logged out successfully');
     },
 );
