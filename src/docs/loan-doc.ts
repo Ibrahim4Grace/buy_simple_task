@@ -1,6 +1,6 @@
 export const loanDocs = {
     paths: {
-        '/api/v1/loans': {
+        '/api/v1/users/loans': {
             get: {
                 summary: 'Get all loans',
                 tags: ['Loans'],
@@ -44,7 +44,7 @@ export const loanDocs = {
                 },
             },
         },
-        '/api/v1/{userEmail}/loans': {
+        '/api/v1/users/{userEmail}/loans': {
             get: {
                 summary: 'Get loans for a specific user',
                 tags: ['Loans'],
@@ -97,7 +97,7 @@ export const loanDocs = {
                 },
             },
         },
-        '/api/v1/loans/status': {
+        '/api/v1/users/loans/status': {
             get: {
                 summary: 'Get loans filtered by status',
                 tags: ['Loans'],
@@ -153,7 +153,7 @@ export const loanDocs = {
                 },
             },
         },
-        '/api/v1/loans/expired': {
+        '/api/v1/users/loans/expired': {
             get: {
                 summary: 'Get expired loans (maturity date in the past)',
                 tags: ['Loans'],
@@ -200,7 +200,7 @@ export const loanDocs = {
                 },
             },
         },
-        '/api/v1/{loanId}/delete': {
+        '/api/v1/user/{loanId}/delete': {
             delete: {
                 summary: 'Delete a loan (Super Admin only)',
                 tags: ['Loans'],
